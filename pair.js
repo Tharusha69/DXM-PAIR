@@ -59,16 +59,37 @@ router.get('/', async (req, res) => {
                 const user_jid = jidNormalizedUser(Pair_Code_By_Maher_Zubair.user.id);
 				   const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `${user_jid}.json`);
                 const string_session = mega_url.replace('https://mega.nz/file/', '')
-				   let sessionmsg = await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: 'cyber-x@;;;' + string_session });
-	               
-                let SIGMA_MD_TEXT = `* Pair Code Connecting Successfully*
+				   let sessionmsg = await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: 'DIMENSION-X~' + string_session });
 
-Don't share this code with any others
+                let SIGMA_MD_TEXT = `⚠️ *Do not share this code with others. Use this to create the DIMENSION-X bot.*
 
-https://wa.me/94740952096
+GITHUB: https://github.com/
 
-*ᴄᴏʀᴅᴇᴅ ʙʏ ꜱᴀᴅᴇᴇᴘᴀ ᴄʜᴀᴍᴜᴅɪᴛʜ*`
-	 await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id,{text:SIGMA_MD_TEXT},{quoted:sessionmsg })
+OUR CHANNEL:  https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23
+
+CONTACT DEV: https://wa.me/94766632281`
+
+    await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: SIGMA_MD_TEXT ,
+contextInfo: {
+    mentionedJid: [ '' ],
+    groupMentions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363261989936335@newsletter',
+      newsletterName: 'ᦔ𝓲ꪑꫀꪀ𝘴𝓲ꪮꪀ-᥊',
+      serverMessageId: 127
+    },
+externalAdReply: {
+title: 'ＤＩＭＥＮＳＩＯＮ-Ｘ',
+body: 'ᴡ ʜ ᴀ ᴛ ꜱ ᴀ ᴘ ᴘ  ᴍ ᴏ ᴠ ɪ ᴇ  ʙ ᴏ ᴛ',
+mediaType: 1,
+sourceUrl: "https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23" ,
+thumbnailUrl: 'https://telegra.ph/file/1f7cb4b2e5ce9cdfb94bf.jpg' ,
+renderLargerThumbnail: true,
+showAdAttribution: true
+}
+}},{quoted:sessionmsg })
 
 
 

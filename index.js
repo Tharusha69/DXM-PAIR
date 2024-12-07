@@ -126,14 +126,27 @@ app.get('/code', async (req, res) => {
 				   const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `${user_jid}.json`);
                 const string_session = mega_url.replace('https://mega.nz/file/', '')
 				   let sessionmsg = await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: 'DIMENSION-X~' + string_session });
+				   const vpvv = "`"
+				   const pvpp = "```"
 
-                let SIGMA_MD_TEXT = `⚠️ *Do not share this code with others. Use this to create the DIMENSION-X bot.*
+let SIGMA_MD_TEXT = `*Hellow, Welcome to* ${pvpp}DIMENSION-X MOVIE DOWNLOADER BOT${pvpp} 👾✅
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
-GITHUB: https://github.com/
+*${vpvv}Do not share This Code ( YOUR SESSION_ID ) with Enyone..! ⚠️${vpvv}*
 
-OUR CHANNEL:  https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23
+* *Github Repository :-*
+${pvpp}https://github.com/CYBERKILLERSTEAM-OFFICIAL/DIMENSION-X${pvpp}
 
-CONTACT DEV: https://wa.me/94766632281`
+* *Developer :-*
+
+*𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 :-*
+${pvpp}https://wa.me/94766632281${pvpp}
+
+*𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 :-*
+${pvpp}https://t.me/Isuru_Chamika${pvpp}
+
+
+*© POWERED BY CYBERKILLERSTEAM*`
 
     await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: SIGMA_MD_TEXT ,
 contextInfo: {
@@ -143,21 +156,19 @@ contextInfo: {
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
       newsletterJid: '120363261989936335@newsletter',
-      newsletterName: 'ᦔ𝓲ꪑꫀꪀ𝘴𝓲ꪮꪀ-᥊',
+      newsletterName: 'D I M E N S I O N  -  X',
       serverMessageId: 127
     },
 externalAdReply: {
-title: 'ＤＩＭＥＮＳＩＯＮ-Ｘ',
-body: 'ᴡ ʜ ᴀ ᴛ ꜱ ᴀ ᴘ ᴘ  ᴍ ᴏ ᴠ ɪ ᴇ  ʙ ᴏ ᴛ',
+title: 'D I M E N S I O N  -  X',
+body: 'ᴍ ᴏ ᴠ ɪ ᴇ  ᴅ ᴏ ᴡ ɴ ʟ ᴏ ᴀ ᴅ ᴇ ʀ  ʙ ᴏ ᴛ',
 mediaType: 1,
-sourceUrl: "https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23" ,
-thumbnailUrl: 'https://telegra.ph/file/1f7cb4b2e5ce9cdfb94bf.jpg' ,
-renderLargerThumbnail: true,
+sourceUrl: "https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23",
+thumbnailUrl: 'https://i.ibb.co/0XpH6Hy/2668b757ad5bb759.jpg' ,
+renderLargerThumbnail: false,
 showAdAttribution: true
 }
 }},{quoted:sessionmsg })
-
-
 
         await delay(100);
         await Pair_Code_By_Maher_Zubair.ws.close();
@@ -175,23 +186,13 @@ showAdAttribution: true
          }
         }
     }
-    return await SIGMA_MD_PAIR_CODE()
-    /* res.status(200).json({
+    const tharupko = await SIGMA_MD_PAIR_CODE()
+     res.status(200).json({
       status: 'Success ✅',
       creator: "MrTharuwa",
-      data: results
-    });*/
+      data: tharupko
+    });
 })
-
-
-
-
-
-
-
-
-
-
 
 // Handle 404 error
 app.use((req, res, next) => {

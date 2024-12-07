@@ -186,13 +186,14 @@ showAdAttribution: true
          }
         }
     }
-    const tharupko = await SIGMA_MD_PAIR_CODE()
-     res.status(200).json({
+    return await SIGMA_MD_PAIR_CODE()
+    /* res.status(200).json({
       status: 'Success ✅',
       creator: "MrTharuwa",
-      data: tharupko
-    });
+      data: results
+    });*/
 })
+
 
 // Handle 404 error
 app.use((req, res, next) => {

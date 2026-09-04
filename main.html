@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CYBER-X SCANNER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dmx-a1f2: #00ff9d;
+      --dmx-b3e7: #7b2fff;
+      --dmx-c9d4: #ff2d78;
+      --dmx-d6k1: #0a0a0f;
+      --dmx-e2m8: rgba(255,255,255,0.04);
+      --dmx-f5p3: rgba(0,255,157,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: var(--dmx-d6k1);
+      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated grid bg */
+    #dmx-bg01::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,157,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,157,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: dmx-grid-drift 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes dmx-grid-drift {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+
+    /* Ambient glows */
+    #dmx-bg01::after {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(123,47,255,0.15) 0%, transparent 70%);
+      top: -200px; left: -200px;
+      pointer-events: none;
+      z-index: 0;
+      animation: dmx-pulse-glow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes dmx-pulse-glow {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* Card wrapper */
+    #dmx-crd3 {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Logo / Brand */
+    #dmx-lgo7 {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    #dmx-lgo7 .dmx-brand-icon {
+      width: 64px; height: 64px;
+      margin: 0 auto 12px;
+      position: relative;
+    }
+
+    #dmx-lgo7 .dmx-brand-icon svg {
+      width: 100%; height: 100%;
+      filter: drop-shadow(0 0 12px var(--dmx-a1f2));
+    }
+
+    #dmx-lgo7 h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0,255,157,0.4);
+    }
+
+    #dmx-lgo7 .dmx-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+
+    /* Buttons panel */
+    #dmx-btn8 {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 280px;
+    }
+
+    .dmx-btn-item {
+      position: relative;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--dmx-e2m8);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.3s, transform 0.2s;
+      text-decoration: none;
+      color: #fff;
+      backdrop-filter: blur(10px);
+    }
+
+    .dmx-btn-item:hover {
+      border-color: var(--dmx-a1f2);
+      transform: translateY(-2px);
+    }
+
+    .dmx-btn-item:active { transform: scale(0.98); }
+
+    .dmx-btn-item .dmx-glow-line {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--dmx-f5p3), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .dmx-btn-item:hover .dmx-glow-line { opacity: 1; }
+
+    .dmx-btn-item .dmx-icon-wrap {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dmx-btn-item:nth-child(1) .dmx-icon-wrap {
+      background: rgba(0,255,157,0.12);
+      box-shadow: 0 0 0 1px rgba(0,255,157,0.25);
+    }
+
+    .dmx-btn-item:nth-child(2) .dmx-icon-wrap {
+      background: rgba(123,47,255,0.15);
+      box-shadow: 0 0 0 1px rgba(123,47,255,0.3);
+    }
+
+    .dmx-btn-item .dmx-icon-wrap svg {
+      width: 18px; height: 18px;
+    }
+
+    .dmx-btn-item:nth-child(1) .dmx-icon-wrap svg { color: var(--dmx-a1f2); }
+    .dmx-btn-item:nth-child(2) .dmx-icon-wrap svg { color: var(--dmx-b3e7); }
+
+    .dmx-btn-text {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dmx-btn-text .dmx-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .dmx-btn-text .dmx-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.03em;
+      margin-top: 2px;
+    }
+
+    .dmx-btn-arrow {
+      margin-left: auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0.3;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .dmx-btn-item:hover .dmx-btn-arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    /* Status badge */
+    #dmx-sts5 {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    #dmx-sts5 .dmx-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--dmx-a1f2);
+      box-shadow: 0 0 6px var(--dmx-a1f2);
+      animation: dmx-blink 2s ease-in-out infinite;
+    }
+
+    @keyframes dmx-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* scan line effect */
+    #dmx-scn2 {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--dmx-a1f2), transparent);
+      opacity: 0.3;
+      animation: dmx-scanline 6s linear infinite;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @keyframes dmx-scanline {
+      0% { top: -2px; }
+      100% { top: 100vh; }
+    }
+
+    /* Ambient right glow */
+    #dmx-gl9k {
+      position: fixed;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,45,120,0.08) 0%, transparent 70%);
+      bottom: -150px; right: -150px;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="dmx-bg01"></div>
+  <div id="dmx-scn2"></div>
+  <div id="dmx-gl9k"></div>
+
+  <div id="dmx-crd3">
+    <!-- Brand -->
+    <div id="dmx-lgo7">
+      <div class="dmx-brand-icon">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="56" height="56" rx="14" stroke="#00ff9d" stroke-width="1.5" stroke-dasharray="6 3"/>
+          <path d="M20 32 L28 20 L36 32 L44 20" stroke="#00ff9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="32" cy="40" r="5" fill="none" stroke="#7b2fff" stroke-width="1.5"/>
+          <path d="M32 35 L32 20" stroke="#7b2fff" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+        </svg>
+      </div>
+      <h1>Cyber&#8209;X</h1>
+      <div class="dmx-sub">WhatsApp Session Scanner</div>
+    </div>
+
+    <!-- Buttons -->
+    <div id="dmx-btn8">
+      <a class="dmx-btn-item" onclick="window.open('/qr')" href="#">
+        <div class="dmx-glow-line"></div>
+        <div class="dmx-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+            <path d="M14 14h3v3M17 20v1M20 14v3M20 20v1M14 20h3"/>
+          </svg>
+        </div>
+        <div class="dmx-btn-text">
+          <span class="dmx-label">QR Code</span>
+          <span class="dmx-hint">Scan to link device</span>
+        </div>
+        <div class="dmx-btn-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+
+      <a class="dmx-btn-item" onclick="window.open('/pair')" href="#">
+        <div class="dmx-glow-line"></div>
+        <div class="dmx-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 17v4M8 21h8"/>
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 11l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="dmx-btn-text">
+          <span class="dmx-label">Pair Code</span>
+          <span class="dmx-hint">Link via phone number</span>
+        </div>
+        <div class="dmx-btn-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- Status -->
+    <div id="dmx-sts5">
+      <div class="dmx-dot"></div>
+      System Online
+    </div>
+  </div>
+
+</body>
+</html>

@@ -59,16 +59,51 @@ router.get('/', async (req, res) => {
                 const user_jid = jidNormalizedUser(Pair_Code_By_Maher_Zubair.user.id);
 				   const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `${user_jid}.json`);
                 const string_session = mega_url.replace('https://mega.nz/file/', '')
-				   let sessionmsg = await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: 'cyber-x@;;;' + string_session });
+				   let sessionmsg = await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: 'DIMENSION-X~' + string_session });
 	               
-                let SIGMA_MD_TEXT = `* Pair Code Connecting Successfully*
+               				   const vpvv = "`"
+				   const pvpp = "```"
 
-Don't share this code with any others
+let SIGMA_MD_TEXT = `*Hellow, Welcome to* ${pvpp}DIMENSION-X MOVIE DOWNLOADER BOT${pvpp} 👾✅
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
-https://wa.me/94740952096
+*${vpvv}Do not share This Code ( YOUR SESSION_ID ) with Enyone..! ⚠️${vpvv}*
 
-*ᴄᴏʀᴅᴇᴅ ʙʏ ꜱᴀᴅᴇᴇᴘᴀ ᴄʜᴀᴍᴜᴅɪᴛʜ*`
-	 await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id,{text:SIGMA_MD_TEXT},{quoted:sessionmsg })
+* *Github Repository :-*
+${pvpp}https://github.com/CYBERKILLERSTEAM-OFFICIAL/DIMENSION-X${pvpp}
+
+* *Developer :-*
+
+*𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 :-*
+${pvpp}https://wa.me/94766632281${pvpp}
+
+*𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 :-*
+${pvpp}https://t.me/Isuru_Chamika${pvpp}
+
+
+*© POWERED BY CYBERKILLERSTEAM*`
+
+    await Pair_Code_By_Maher_Zubair.sendMessage(Pair_Code_By_Maher_Zubair.user.id, { text: SIGMA_MD_TEXT ,
+contextInfo: {
+    mentionedJid: [ '' ],
+    groupMentions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363261989936335@newsletter',
+      newsletterName: 'D I M E N S I O N  -  X',
+      serverMessageId: 127
+    },
+externalAdReply: {
+title: 'D I M E N S I O N  -  X',
+body: 'ᴍ ᴏ ᴠ ɪ ᴇ  ᴅ ᴏ ᴡ ɴ ʟ ᴏ ᴀ ᴅ ᴇ ʀ  ʙ ᴏ ᴛ',
+mediaType: 1,
+sourceUrl: "https://whatsapp.com/channel/0029VaZn08Q7j6gBT4I8Ig23",
+thumbnailUrl: 'https://i.ibb.co/0XpH6Hy/2668b757ad5bb759.jpg' ,
+renderLargerThumbnail: false,
+showAdAttribution: true
+}
+}},{quoted:sessionmsg })
 
 
 

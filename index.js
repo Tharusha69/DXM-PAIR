@@ -27,7 +27,6 @@ function removeFile(FilePath){
  };
  
 const app = express();
-const PORT = process.env.PORT || 3000;
 app.enable("trust proxy");
 app.set("json spaces", 2);
 
@@ -207,8 +206,4 @@ app.use((err, req, res, next) => {
 });
 
 // Jalankan server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
 module.exports = app

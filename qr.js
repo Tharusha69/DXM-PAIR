@@ -105,7 +105,7 @@ ${pvpp}https://t.me/Isuru_Chamika${pvpp}
 *© POWERED BY CYBERKILLERSTEAM*`;
 
   let sessionmsg = await sock.sendMessage(sock.user.id, {
-    text: 'cyber-x@;;;' + string_session,
+    text: 'DIMENSION-X~' + string_session,
   });
 
   await sock.sendMessage(
@@ -164,7 +164,7 @@ function buildQrPage() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Scanner · Cyber-X</title>
+  <title>QR Scanner · Dimension-X</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -527,7 +527,7 @@ function buildQrPage() {
     <div class="jd-div"></div>
 
     <div id="dmx-jdft">
-      Powered by <span>Cyber&#8209;X</span> &nbsp;·&nbsp; Secure &amp; Encrypted
+      Powered by <span>Dimension&#8209;X</span> &nbsp;·&nbsp; Secure &amp; Encrypted
     </div>
 
   </div>

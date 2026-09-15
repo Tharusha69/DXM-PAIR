@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pair Code · Cyber-X</title>
+  <title>Pair Code · Dimension-X</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -363,6 +363,36 @@
       color: var(--dmx-p1r7);
       opacity: 0.6;
     }
+
+    /* Connect status row (shown under the code once it's issued) */
+    .dmx-connect-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .dmx-connect-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #ffd700;
+      box-shadow: 0 0 6px #ffd700;
+      animation: dmx-dot-blink 1.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .dmx-connect-dot.dmx-connected {
+      background: var(--dmx-p1r7);
+      box-shadow: 0 0 6px var(--dmx-p1r7);
+      animation: none;
+    }
+
+    @keyframes dmx-dot-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
   </style>
 </head>
 <body>
@@ -419,7 +449,7 @@
 
       <!-- Footer -->
       <div id="dmx-ftr1p">
-        Powered by <span>Cyber&#8209;X</span> &nbsp;·&nbsp; Secure Session
+        Powered by <span>Dimension&#8209;X</span> &nbsp;·&nbsp; Secure Session
       </div>
 
     </div>
@@ -458,8 +488,47 @@
       } catch(e) {}
     }
 
+    let dmxPollTimer   = null;
+    let dmxPollTries   = 0;
+    const DMX_MAX_POLL = 120; // seconds
+
+    function stopStatusPoll() {
+      if (dmxPollTimer) clearInterval(dmxPollTimer);
+      dmxPollTimer = null;
+      dmxPollTries = 0;
+    }
+
+    function startStatusPoll() {
+      stopStatusPoll();
+      dmxPollTries = 0;
+
+      dmxPollTimer = setInterval(async () => {
+        dmxPollTries++;
+
+        const dotEl = document.getElementById('dmx-connect-dot');
+        const msgEl = document.getElementById('dmx-connect-msg');
+        if (!dotEl || !msgEl) { stopStatusPoll(); return; }
+
+        if (dmxPollTries > DMX_MAX_POLL) {
+          msgEl.textContent = 'Still waiting — code may have expired, try again';
+          stopStatusPoll();
+          return;
+        }
+
+        try {
+          const { data } = await axios('/code/status');
+          if (data.ready || data.closed) {
+            dotEl.classList.add('dmx-connected');
+            msgEl.textContent = 'Connected — session saved to your WhatsApp chat';
+            stopStatusPoll();
+          }
+        } catch (_) { /* keep polling silently */ }
+      }, 1500);
+    }
+
     subBtn.addEventListener('click', async (e) => {
       e.preventDefault();
+      stopStatusPoll();
       const raw = numIn.value.replace(/[^0-9]/g, '');
 
       if (!raw) {
@@ -501,7 +570,12 @@
             <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.35)">Your Pair Code</div>
             <div class="dmx-code-display">${code}</div>
             <button class="dmx-copy-btn" id="dmx-cpybtn" onclick="copyCode('${code}')">Copy Code</button>
+            <div class="dmx-connect-row" id="dmx-connect-row">
+              <div class="dmx-connect-dot" id="dmx-connect-dot"></div>
+              <span id="dmx-connect-msg">Waiting for you to enter the code on WhatsApp…</span>
+            </div>
           </div>`);
+          startStatusPoll();
         }
       } catch(err) {
         setResult(`<div class="dmx-status-box dmx-error">

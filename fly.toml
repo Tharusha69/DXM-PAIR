@@ -1,15 +1,15 @@
-# fly.toml app configuration file generated for dxm-pair on 2026-09-09T04:15:25Z
+# fly.toml app configuration file generated for dxm-pair-9jjjsw on 2026-09-15T14:09:17Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'dxm-pair'
-primary_region = 'sin'
+app = 'dxm-pair-9jjjsw'
+primary_region = 'ams'
 
 [build]
 
 [http_service]
-  internal_port = 3000
+  internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true

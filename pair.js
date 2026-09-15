@@ -7,6 +7,16 @@ const { upload } = require('./mega')
 var auth_path = './sessions/'
 let router = express.Router()
 const pino = require("pino");
+
+// In-memory connection state, mirrors qr.js so the pair-code
+// flow can also report a "connected" status to the front-end.
+let pairReady = false;
+let pairClosed = false;
+
+// ── Status endpoint (polled by pair.html for the "connected" state) ──
+router.get('/status', (req, res) => {
+    res.json({ ready: pairReady, closed: pairClosed });
+});
 const {
     default: Maher_Zubair,
     useMultiFileAuthState,
@@ -23,6 +33,8 @@ function removeFile(FilePath){
 router.get('/', async (req, res) => {
     const id = makeid();
     let num = req.query.number;
+    pairReady = false;
+    pairClosed = false;
         async function SIGMA_MD_PAIR_CODE() {
         const {
             state,
@@ -53,6 +65,7 @@ router.get('/', async (req, res) => {
                     lastDisconnect
                 } = s;
                 if (connection == "open") {
+                pairReady = true;
                 await delay(5000);
                 let data =  fs.readFileSync('./sessions/creds.json')
                 await delay(800);
@@ -109,6 +122,7 @@ showAdAttribution: true
 
         await delay(100);
         await Pair_Code_By_Maher_Zubair.ws.close();
+        pairClosed = true;
         return await removeFile('./sessions');
             } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
                     await delay(10000);
